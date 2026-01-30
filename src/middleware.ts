@@ -39,6 +39,24 @@ export const incomingActivityMiddleware = ({ dispatch }: any) => (next: any) => 
   return next(action)
 }
 
+export const connectionMiddleware = ({ dispatch }: any) => (next: any) => (action: any) => {
+  if (action.type === 'DIRECT_LINE/CONNECT_FULFILLED') {
+    // Send startConversation event when connection is established
+    dispatch({
+      type: 'DIRECT_LINE/POST_ACTIVITY',
+      meta: { method: 'keyboard' },
+      payload: {
+        activity: {
+          channelData: { postBack: true },
+          name: 'startConversation',
+          type: 'event'
+        }
+      }
+    })
+  }
+  return next(action)
+}
+
 export const outgoingActivityMiddleware = () => (next: any) => (action: any) => {
   if (action.type === 'DIRECT_LINE/POST_ACTIVITY') {
     const { activity } = action.payload

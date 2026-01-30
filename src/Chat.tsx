@@ -8,7 +8,7 @@ import { FluentThemeProvider } from 'botframework-webchat-fluent-theme'
 import React, { useEffect, useState, useMemo } from 'react'
 
 import { acquireToken } from './acquireToken'
-import { incomingActivityMiddleware, outgoingActivityMiddleware } from './middleware'
+import { incomingActivityMiddleware, outgoingActivityMiddleware, connectionMiddleware } from './middleware'
 import { directLineRegion, directLineUrl } from './settings.js'
 
 const { BasicWebChat, Composer } = Components
@@ -39,22 +39,7 @@ function Chat () {
         {},
         incomingActivityMiddleware,
         outgoingActivityMiddleware,
-        ({ dispatch }: any) => (next: any) => (action: any) => {
-          if (action.type === 'DIRECT_LINE/CONNECT_FULFILLED') {
-            dispatch({
-              type: 'DIRECT_LINE/POST_ACTIVITY',
-              meta: { method: 'keyboard' },
-              payload: {
-                activity: {
-                  channelData: { postBack: true },
-                  name: 'startConversation',
-                  type: 'event'
-                }
-              }
-            })
-          }
-          return next(action)
-        }
+        connectionMiddleware
       ),
     []
   )
