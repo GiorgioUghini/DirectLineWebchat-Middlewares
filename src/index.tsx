@@ -7,48 +7,34 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import Chat from './Chat'
 
-const cities = [
+const pizzas = [
   {
-    name: 'Paris',
-    country: 'France',
-    description: 'The City of Light captivates visitors with its iconic Eiffel Tower, world-class museums, and charming cafés.',
-    population: '2.1 million',
-    highlight: 'Eiffel Tower'
+    name: 'Margherita',
+    origin: 'Naples, Italy',
+    description: 'The queen of pizzas - simple perfection with San Marzano tomatoes, fresh mozzarella, basil, and olive oil.',
+    calories: '250 per slice',
+    highlight: 'Fresh Basil'
   },
   {
-    name: 'Rome',
-    country: 'Italy',
-    description: 'The Eternal City offers ancient ruins, Renaissance art, and the best pasta you\'ll ever taste.',
-    population: '2.8 million',
-    highlight: 'Colosseum'
+    name: 'Pepperoni',
+    origin: 'United States',
+    description: 'America\'s favorite with spicy cured pepperoni that curls into crispy cups of deliciousness.',
+    calories: '310 per slice',
+    highlight: 'Crispy Pepperoni'
   },
   {
-    name: 'Barcelona',
-    country: 'Spain',
-    description: 'Gaudí\'s masterpieces, Mediterranean beaches, and vibrant nightlife make this city unforgettable.',
-    population: '1.6 million',
-    highlight: 'Sagrada Família'
+    name: 'Quattro Formaggi',
+    origin: 'Italy',
+    description: 'A cheese lover\'s dream featuring mozzarella, gorgonzola, fontina, and parmesan in perfect harmony.',
+    calories: '290 per slice',
+    highlight: 'Four Cheeses'
   },
   {
-    name: 'Amsterdam',
-    country: 'Netherlands',
-    description: 'Picturesque canals, world-famous museums, and a cycling culture that inspires the world.',
-    population: '872,000',
-    highlight: 'Canal Ring'
-  },
-  {
-    name: 'Prague',
-    country: 'Czech Republic',
-    description: 'Gothic spires, cobblestone streets, and a fairy-tale old town frozen in time.',
-    population: '1.3 million',
-    highlight: 'Charles Bridge'
-  },
-  {
-    name: 'Vienna',
-    country: 'Austria',
-    description: 'Imperial palaces, classical music heritage, and the birthplace of coffeehouse culture.',
-    population: '1.9 million',
-    highlight: 'Schönbrunn Palace'
+    name: 'Diavola',
+    origin: 'Italy',
+    description: 'For those who like it hot - spicy salami, chili flakes, and a kick that keeps you coming back.',
+    calories: '300 per slice',
+    highlight: 'Spicy Salami'
   }
 ]
 
@@ -59,12 +45,12 @@ function App() {
       <header className="header">
         <div className="header-content">
           <div className="logo">
-            <span className="logo-icon">🏛️</span>
-            <span className="logo-text">EuroDiscover</span>
+            <span className="logo-icon">🍕</span>
+            <span className="logo-text">PizzaParadise</span>
           </div>
           <nav className="nav">
-            <a href="#destinations">Destinations</a>
-            <a href="#assistant">Travel Assistant</a>
+            <a href="#menu">Our Pizzas</a>
+            <a href="#assistant">Pizza Expert</a>
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
           </nav>
@@ -74,30 +60,30 @@ function App() {
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">
-          <h1>Discover Europe's Most Beautiful Cities</h1>
-          <p>From ancient Rome to romantic Paris, explore the rich history, stunning architecture, and vibrant cultures that make European cities truly magical.</p>
+          <h1>Discover the World's Most Delicious Pizzas</h1>
+          <p>From classic Margherita to bold Diavola, explore the rich traditions, authentic recipes, and mouthwatering flavours that make pizza the world's favorite food.</p>
         </div>
       </section>
 
-      {/* Featured Cities */}
-      <section id="destinations" className="cities-section">
-        <h2>Featured Destinations</h2>
+      {/* Featured Pizzas */}
+      <section id="menu" className="cities-section">
+        <h2>Featured Pizzas</h2>
         <div className="cities-grid">
-          {cities.map((city) => (
-            <div key={city.name} className="city-card">
+          {pizzas.map((pizza) => (
+            <div key={pizza.name} className="city-card">
               <div className="city-header">
-                <h3>{city.name}</h3>
-                <span className="country-tag">{city.country}</span>
+                <h3>{pizza.name}</h3>
+                <span className="country-tag">{pizza.origin}</span>
               </div>
-              <p className="city-description">{city.description}</p>
+              <p className="city-description">{pizza.description}</p>
               <div className="city-stats">
                 <div className="stat">
-                  <span className="stat-label">Population</span>
-                  <span className="stat-value">{city.population}</span>
+                  <span className="stat-label">Calories</span>
+                  <span className="stat-value">{pizza.calories}</span>
                 </div>
                 <div className="stat">
-                  <span className="stat-label">Must See</span>
-                  <span className="stat-value">{city.highlight}</span>
+                  <span className="stat-label">Star Ingredient</span>
+                  <span className="stat-value">{pizza.highlight}</span>
                 </div>
               </div>
             </div>
@@ -108,8 +94,8 @@ function App() {
       {/* Chat Assistant Section */}
       <section id="assistant" className="chat-section">
         <div className="chat-intro">
-          <h2>Your Personal Travel Assistant</h2>
-          <p>Have questions about European destinations? Our AI-powered travel assistant is here to help you plan your perfect trip. Ask about attractions, local cuisine, transportation, or get personalized recommendations!</p>
+          <h2>Your Personal Pizza Expert</h2>
+          <p>Have questions about pizza? Our AI-powered pizza expert is here to help you discover new flavours, learn about toppings, find the perfect pairing, or get personalized recommendations!</p>
         </div>
         <div className="chat-container">
           <Chat />
@@ -120,24 +106,24 @@ function App() {
       <section id="about" className="info-section">
         <div className="info-grid">
           <div className="info-card">
-            <div className="info-icon">🗺️</div>
-            <h3>Curated Guides</h3>
-            <p>Expert-crafted itineraries for every type of traveler, from art lovers to foodies.</p>
+            <div className="info-icon">📖</div>
+            <h3>Authentic Recipes</h3>
+            <p>Traditional recipes passed down through generations of Italian pizzaiolos.</p>
           </div>
           <div className="info-card">
             <div className="info-icon">💬</div>
-            <h3>24/7 Support</h3>
-            <p>Our travel assistant is always available to answer your questions and provide recommendations.</p>
+            <h3>24/7 Pizza Expert</h3>
+            <p>Our pizza assistant is always available to answer your questions and suggest perfect combinations.</p>
           </div>
           <div className="info-card">
-            <div className="info-icon">🎫</div>
-            <h3>Skip the Lines</h3>
-            <p>Get insider tips on the best times to visit popular attractions and avoid crowds.</p>
+            <div className="info-icon">🧀</div>
+            <h3>Premium Ingredients</h3>
+            <p>Learn about the finest cheeses, freshest tomatoes, and artisan toppings.</p>
           </div>
           <div className="info-card">
-            <div className="info-icon">🍽️</div>
-            <h3>Local Favorites</h3>
-            <p>Discover hidden gems and authentic local experiences beyond the tourist trails.</p>
+            <div className="info-icon">🔥</div>
+            <h3>Perfect Pairings</h3>
+            <p>Discover the best wine, beer, and side dish pairings for every pizza style.</p>
           </div>
         </div>
       </section>
@@ -146,22 +132,22 @@ function App() {
       <footer id="contact" className="footer">
         <div className="footer-content">
           <div className="footer-brand">
-            <span className="logo-icon">🏛️</span>
-            <span className="logo-text">EuroDiscover</span>
-            <p>Your gateway to European adventures</p>
+            <span className="logo-icon">🍕</span>
+            <span className="logo-text">PizzaParadise</span>
+            <p>Your gateway to pizza perfection</p>
           </div>
           <div className="footer-links">
             <div className="footer-column">
               <h4>Explore</h4>
-              <a href="#destinations">Destinations</a>
-              <a href="#assistant">Travel Assistant</a>
+              <a href="#menu">Our Pizzas</a>
+              <a href="#assistant">Pizza Expert</a>
               <a href="#about">About Us</a>
             </div>
             <div className="footer-column">
               <h4>Resources</h4>
-              <a href="#">Travel Tips</a>
-              <a href="#">Packing Guides</a>
-              <a href="#">Safety Info</a>
+              <a href="#">Pizza Recipes</a>
+              <a href="#">Dough Guide</a>
+              <a href="#">Topping Ideas</a>
             </div>
             <div className="footer-column">
               <h4>Connect</h4>
@@ -172,7 +158,7 @@ function App() {
           </div>
         </div>
         <div className="footer-bottom">
-          <p>© 2025 EuroDiscover. All rights reserved. This is a demo website.</p>
+          <p>© 2025 PizzaParadise. All rights reserved. This is a demo website.</p>
         </div>
       </footer>
     </div>

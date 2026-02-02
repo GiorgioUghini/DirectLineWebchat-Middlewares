@@ -53,6 +53,8 @@ export const incomingActivityMiddleware = ({ dispatch }: any) => (next: any) => 
     if (activity.type === 'message' && activity.text && activity.text.startsWith('{')) {
       return
     }
+
+    
   }
   return next(action)
 }
@@ -65,8 +67,6 @@ export const outgoingActivityMiddleware = () => (next: any) => (action: any) => 
 
     // Modify and store outgoing messages
     if (activity.type === 'message' && activity.text) {
-      // Add exclamation mark to the message
-      activity.text = activity.text + ' !!!!!'
 
       window.messageHistory.push({
         id: activity.id || crypto.randomUUID(),

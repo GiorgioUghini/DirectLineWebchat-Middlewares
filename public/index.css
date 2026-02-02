@@ -28,7 +28,7 @@ body {
 
 /* Header */
 .header {
-  background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+  background: linear-gradient(135deg, #9a2617 0%, #c53030 100%);
   color: white;
   padding: 1rem 2rem;
   position: sticky;
@@ -79,7 +79,7 @@ body {
 
 /* Hero Section */
 .hero {
-  background: linear-gradient(135deg, #2c5282 0%, #4299e1 100%);
+  background: linear-gradient(135deg, #c53030 0%, #ed8936 100%);
   color: white;
   padding: 4rem 2rem;
   text-align: center;
@@ -111,7 +111,7 @@ body {
 .cities-section h2 {
   text-align: center;
   font-size: 2rem;
-  color: #1a365d;
+  color: #9a2617;
   margin: 0 0 2rem 0;
 }
 
@@ -146,11 +146,11 @@ body {
 .city-header h3 {
   margin: 0;
   font-size: 1.4rem;
-  color: #1a365d;
+  color: #9a2617;
 }
 
 .country-tag {
-  background: #4299e1;
+  background: #ed8936;
   color: white;
   padding: 0.25rem 0.75rem;
   border-radius: 20px;
@@ -202,7 +202,7 @@ body {
 
 .chat-intro h2 {
   font-size: 2rem;
-  color: #1a365d;
+  color: #9a2617;
   margin: 0 0 1rem 0;
 }
 
@@ -256,7 +256,7 @@ body {
 
 .info-card h3 {
   margin: 0 0 0.5rem 0;
-  color: #1a365d;
+  color: #9a2617;
 }
 
 .info-card p {
@@ -267,7 +267,7 @@ body {
 
 /* Footer */
 .footer {
-  background: #1a365d;
+  background: #9a2617;
   color: white;
   padding: 3rem 2rem 1rem;
   margin-top: auto;
