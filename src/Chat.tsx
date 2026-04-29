@@ -9,7 +9,8 @@ import React, { useEffect, useState, useMemo } from 'react'
 
 import { acquireToken } from './acquireToken'
 import { incomingActivityMiddleware, outgoingActivityMiddleware, connectionMiddleware } from './middleware'
-import { directLineRegion, directLineUrl } from './settings.js'
+import { authMode, directLineRegion, directLineUrl } from './settings.js'
+import MicrosoftChat from './MicrosoftChat'
 
 const { BasicWebChat, Composer } = Components
 
@@ -27,7 +28,7 @@ const buildDirectLineDomain = (region?: string | null) => {
   return `https://${base}${DIRECT_LINE_PATH}`
 }
 
-function Chat () {
+function DirectLineChat () {
   const [connection, setConnection] = useState<ReturnType<typeof createDirectLine> | null>(null)
   const [error, setError] = useState<string | null>(null)
   const webchatSettings = { showTyping: true }
@@ -96,6 +97,14 @@ function Chat () {
       </FluentThemeProvider>
       )
     : null
+}
+
+// Chat routes to the correct implementation based on authMode in settings.js
+function Chat () {
+  if (authMode === 'microsoft') {
+    return <MicrosoftChat />
+  }
+  return <DirectLineChat />
 }
 
 export default Chat
