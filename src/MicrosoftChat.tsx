@@ -13,7 +13,7 @@ import { microsoftSettings } from './settings.js'
 
 const { BasicWebChat, Composer } = Components
 
-function MicrosoftChat () {
+function MicrosoftChat ({ store }: { store: any }) {
   const [connection, setConnection] = useState<CopilotStudioWebChatConnection | null>(null)
   const [error, setError] = useState<string | null>(null)
   const webchatSettings = { showTyping: true }
@@ -62,7 +62,7 @@ function MicrosoftChat () {
   return connection
     ? (
       <FluentThemeProvider>
-        <Composer directLine={connection}>
+        <Composer directLine={connection} store={store}>
           <BasicWebChat />
         </Composer>
       </FluentThemeProvider>

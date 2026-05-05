@@ -1,3 +1,5 @@
+import { authMode } from './settings.js'
+
 // Declare global message history on window
 declare global {
   interface Window {
@@ -11,8 +13,8 @@ declare global {
 }
 
 export const connectionMiddleware = ({ dispatch }: any) => (next: any) => (action: any) => {
-  if (action.type === 'DIRECT_LINE/CONNECT_FULFILLED') {
-    // Send startConversation event when connection is established
+  // Copilot Studio's SDK auto-starts the conversation; only Direct Line needs an explicit kickoff.
+  if (action.type === 'DIRECT_LINE/CONNECT_FULFILLED' && authMode === 'directline') {
     dispatch({
       type: 'DIRECT_LINE/POST_ACTIVITY',
       meta: { method: 'keyboard' },

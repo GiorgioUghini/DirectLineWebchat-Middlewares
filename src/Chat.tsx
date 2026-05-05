@@ -3,37 +3,16 @@
  * Licensed under the MIT License.
  */
 
-import { Components, createDirectLine, createStore, createBrowserWebSpeechPonyfillFactory } from 'botframework-webchat'
-import { FluentThemeProvider } from 'botframework-webchat-fluent-theme'
-import React, { useEffect, useState, useMemo } from 'react'
+import { createStore } from 'botframework-webchat'
+import React, { useMemo } from 'react'
 
-import { acquireToken } from './acquireToken'
+import { authMode } from './settings.js'
 import { incomingActivityMiddleware, outgoingActivityMiddleware, connectionMiddleware } from './middleware'
-import { authMode, directLineRegion, directLineUrl } from './settings.js'
+import DirectLineChat from './DirectLineChat'
 import MicrosoftChat from './MicrosoftChat'
 
-const { BasicWebChat, Composer } = Components
-
-const DIRECT_LINE_PATH = '/v3/directline'
-
-const buildDirectLineDomain = (region?: string | null) => {
-  const trimmed = region?.trim()
-
-  if (!trimmed || trimmed === 'directline.botframework.com') {
-    return undefined
-  }
-
-  const base = trimmed.replace(/^https?:\/\//i, '').replace(/\/$/, '')
-
-  return `https://${base}${DIRECT_LINE_PATH}`
-}
-
-function DirectLineChat () {
-  const [connection, setConnection] = useState<ReturnType<typeof createDirectLine> | null>(null)
-  const [error, setError] = useState<string | null>(null)
-  const webchatSettings = { showTyping: true }
-  const webSpeechPonyfillFactory = createBrowserWebSpeechPonyfillFactory()
-
+// Chat routes to the correct implementation based on authMode in settings.js
+function Chat () {
   const store = useMemo(
     () =>
       createStore(
@@ -45,66 +24,10 @@ function DirectLineChat () {
     []
   )
 
-  useEffect(() => {
-    let isCancelled = false
-
-    const initializeConnection = async () => {
-      if (!directLineUrl || directLineUrl === 'YOUR_DIRECTLINE_URL') {
-        setError('Update directLineUrl in settings.js with your Direct Line endpoint.')
-        return
-      }
-
-      try {
-        const { token } = await acquireToken(directLineUrl)
-        const domain = buildDirectLineDomain(directLineRegion)
-
-        if (isCancelled) {
-          return
-        }
-
-        const directLineOptions = domain ? { token, domain } : { token }
-
-        setConnection(createDirectLine(directLineOptions))
-      } catch (err) {
-        console.error('Unable to initialize Direct Line', err)
-        if (!isCancelled) {
-          setError(err instanceof Error ? err.message : 'Unable to initialize Direct Line connection.')
-        }
-      }
-    }
-
-    initializeConnection()
-
-    return () => {
-      isCancelled = true
-    }
-  }, [])
-
-  if (error) {
-    return (
-      <div role='alert'>
-        {error}
-      </div>
-    )
-  }
-
-  return connection
-    ? (
-      <FluentThemeProvider>
-        <Composer directLine={connection} store={store}>
-          <BasicWebChat {...webchatSettings} />
-        </Composer>
-      </FluentThemeProvider>
-      )
-    : null
-}
-
-// Chat routes to the correct implementation based on authMode in settings.js
-function Chat () {
   if (authMode === 'microsoft') {
-    return <MicrosoftChat />
+    return <MicrosoftChat store={store} />
   }
-  return <DirectLineChat />
+  return <DirectLineChat store={store} />
 }
 
 export default Chat
